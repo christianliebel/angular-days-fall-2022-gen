@@ -1,4 +1,4 @@
-import {Tree} from '@nrwl/devkit';
+import {generateFiles, joinPathFragments, readProjectConfiguration, Tree} from '@nrwl/devkit';
 import {applicationGenerator} from "@nrwl/angular/generators";
 
 interface Schema {
@@ -12,4 +12,9 @@ export default async function (tree: Tree, schema: Schema) {
     prefix: schema.name,
     style: 'scss',
   });
+
+  const sourceDir = joinPathFragments(__dirname, 'files');
+  const projectDir = readProjectConfiguration(tree, schema.name).root;
+  const destinationDir = joinPathFragments(projectDir, 'src', 'app');
+  generateFiles(tree, sourceDir, destinationDir, {});
 }
