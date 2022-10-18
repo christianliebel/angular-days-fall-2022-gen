@@ -16,5 +16,7 @@ export default async function (tree: Tree, schema: Schema) {
   const sourceDir = joinPathFragments(__dirname, 'files');
   const projectDir = readProjectConfiguration(tree, schema.name).root;
   const destinationDir = joinPathFragments(projectDir, 'src', 'app');
-  generateFiles(tree, sourceDir, destinationDir, {});
+  generateFiles(tree, sourceDir, destinationDir, {
+    tpl: '',
+  });
 }
