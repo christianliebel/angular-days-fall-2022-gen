@@ -1,1 +1,1 @@
-export const loginSteps = [];
+export const loginSteps = ["Step",];
