@@ -1,5 +1,7 @@
 import {generateFiles, joinPathFragments, readProjectConfiguration, Tree} from '@nrwl/devkit';
 import {applicationGenerator} from "@nrwl/angular/generators";
+import {insertImport} from "../utils/insert-import";
+import {insertNgModuleImport} from "@nrwl/angular/src/generators/utils";
 
 interface Schema {
   name: string;
@@ -19,4 +21,8 @@ export default async function (tree: Tree, schema: Schema) {
   generateFiles(tree, sourceDir, destinationDir, {
     tpl: '',
   });
+
+  const modulePath = joinPathFragments(projectDir, 'src', 'app', 'app.module.ts');
+  insertImport(tree, modulePath, 'MyLibraryModule', '@my-workspace/my-library');
+  insertNgModuleImport(tree, modulePath, 'MyLibraryModule');
 }
